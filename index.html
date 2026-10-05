@@ -1,0 +1,108 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Svara clinician</title><style>:root{--bg:#faf8f5;--ink:#241f21;--ink2:#5c5558;--line:#e8e3de;--teal:#3f7f72;--tealbg:#e8f1ee;--sand:#f2ece6;--red:#c0333c;--card:#fff}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+h1,h2,h3{font-family:Georgia,"Times New Roman",serif;font-weight:400;letter-spacing:-.01em;line-height:1.2;margin:0 0 12px}
+h1{font-size:clamp(32px,6vw,52px)}h2{font-size:clamp(24px,4vw,32px)}h3{font-size:19px}
+p{margin:0 0 12px}a{color:var(--teal)}
+.banner{position:sticky;top:0;z-index:50;background:#241f21;color:#fff;font-size:13px;line-height:1.4;padding:8px 16px;text-align:center}
+.banner b{color:#bfe3d9}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+header.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 0;flex-wrap:wrap}
+.logo{font-family:Georgia,serif;font-size:24px;letter-spacing:.14em}
+.logo small{font-family:inherit;font-size:11px;letter-spacing:.05em;color:var(--ink2);margin-left:8px}
+nav.tabs{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:16px;border-bottom:1px solid var(--line)}
+nav.tabs button{background:none;border:0;border-bottom:2px solid transparent;padding:10px 12px;min-height:44px;font:inherit;color:var(--ink2);cursor:pointer}
+nav.tabs button.on{color:var(--ink);border-color:var(--ink)}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 20px;border-radius:999px;border:1px solid var(--ink);background:var(--ink);color:#fff;font:inherit;cursor:pointer;text-decoration:none}
+.btn.alt{background:transparent;color:var(--ink);border-color:#cfc8c2}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.row{display:flex;flex-wrap:wrap;gap:12px;margin:12px 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;margin:12px 0}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.note{background:var(--sand);border-radius:12px;padding:14px 16px;margin:12px 0;font-size:14px}
+.note.bad{background:#fbe9ea;color:#7c1d24}
+.muted{color:var(--ink2);font-size:14px}
+.pill{display:inline-block;background:var(--tealbg);color:#255a50;border-radius:999px;padding:2px 12px;font-size:13px;margin:2px 4px 2px 0}
+.pill.s{background:var(--sand);color:var(--ink2)}.pill.r{background:#fbe9ea;color:#7c1d24}
+.scale{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:16px 0}
+.scale button,.chip{min-height:48px;border:1px solid var(--line);background:#fff;border-radius:12px;font:inherit;cursor:pointer;color:var(--ink)}
+.scale button:hover,.chip:hover{border-color:var(--teal)}
+.scale button b{display:block;font-size:20px}.scale button small{font-size:11px;color:var(--ink2)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.chip{padding:0 14px;border-radius:999px}.chip.on{border-color:var(--teal);background:var(--tealbg);font-weight:600}
+.bar{display:grid;grid-template-columns:130px 1fr 36px;gap:10px;align-items:center;margin:8px 0;font-size:14px}
+.bar i{display:block;height:10px;border-radius:5px;background:var(--teal)}.bar div{background:var(--sand);border-radius:5px}
+table{width:100%;border-collapse:collapse;font-size:14px}th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--ink2);font-weight:600}
+.tw{overflow-x:auto}
+textarea,input[type=text],input[type=email],input[type=password],select{width:100%;font:inherit;border:1px solid #d6cfc8;border-radius:10px;padding:10px;background:#fff;color:var(--ink)}
+label.ck{display:flex;gap:10px;align-items:flex-start;margin:10px 0}label.ck input{width:20px;height:20px;margin-top:4px}
+.hero{padding:40px 0 24px}.sw{display:inline-block;position:relative;width:46px;height:26px}
+.msg{border-top:1px solid var(--line);padding-top:10px;margin-top:12px}
+footer{padding:32px 0 48px;color:var(--ink2);font-size:13px}
+svg text{font:11px sans-serif;fill:#5c5558}
+@media(max-width:600px){.bar{grid-template-columns:96px 1fr 30px}}
+</style></head><body><div id="app"></div><script>const SB_URL='https://epedefnrawpwdbbkyopc.supabase.co',SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVwZWRlZm5yYXdwd2RiYmt5b3BjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTEyMTQ4ODIsImV4cCI6MjEwNjc5MDg4Mn0.bTeHJXav5mICQb0cq35qlyaXcbDy7dkhob28TnTpxwM';
+const DIMS=['Sleep','Energy','Mood','Relaxation','Motivation','Focus','Recovery','Social connection'];
+const $=(s,r=document)=>r.querySelector(s);
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const avg=a=>a.length?Math.round(a.reduce((x,y)=>x+y,0)/a.length):null;
+const sgn=x=>(x>0?'+':'')+x;
+const word=x=>x>=4?'improving':x<=-4?'lower':'steady';
+/* ---- tiny Supabase client (auth + REST), no external scripts ---- */
+const SB={
+ sess:JSON.parse(localStorage.getItem('sv_sess_'+location.pathname.split('/')[1]||'')||'null'),
+ key(){return 'sv_sess_'+(location.pathname.split('/')[1]||'')},
+ save(s){this.sess=s;if(s)localStorage.setItem(this.key(),JSON.stringify(s));else localStorage.removeItem(this.key())},
+ async auth(path,body){const r=await fetch(SB_URL+'/auth/v1/'+path,{method:'POST',headers:{apikey:SB_KEY,'Content-Type':'application/json'},body:JSON.stringify(body)});const j=await r.json();if(!r.ok)throw new Error(j.msg||j.error_description||j.message||'Request failed');return j},
+ async signup(email,password,name){const j=await this.auth('signup',{email,password,data:{name}});if(!j.access_token)throw new Error('Sign-up needs email confirmation, which is off in this test project. Try signing in.');this.save({at:j.access_token,rt:j.refresh_token,exp:Date.now()+(j.expires_in-60)*1000,uid:j.user.id,email});return j},
+ async login(email,password){const j=await this.auth('token?grant_type=password',{email,password});this.save({at:j.access_token,rt:j.refresh_token,exp:Date.now()+(j.expires_in-60)*1000,uid:j.user.id,email});return j},
+ async token(){if(!this.sess)return null;if(Date.now()>this.sess.exp){try{const j=await this.auth('token?grant_type=refresh_token',{refresh_token:this.sess.rt});this.save({at:j.access_token,rt:j.refresh_token,exp:Date.now()+(j.expires_in-60)*1000,uid:this.sess.uid,email:this.sess.email})}catch(e){this.save(null);return null}}return this.sess.at},
+ logout(){this.save(null)},
+ async req(path,opt={}){const t=await this.token();const h={apikey:SB_KEY,Authorization:'Bearer '+(t||SB_KEY),'Content-Type':'application/json'};if(opt.prefer)h.Prefer=opt.prefer;
+  const r=await fetch(SB_URL+'/rest/v1/'+path,{method:opt.method||'GET',headers:h,body:opt.body?JSON.stringify(opt.body):undefined});const txt=await r.text();let j=null;try{j=txt?JSON.parse(txt):null}catch(e){}
+  if(!r.ok)throw new Error((j&&(j.message||j.hint))||'Request failed ('+r.status+')');return j},
+ get(t,q=''){return this.req(t+(q?'?'+q:''))},
+ ins(t,b,ret=false){return this.req(t,{method:'POST',body:b,prefer:ret?'return=representation':'return=minimal'})},
+ upd(t,q,b){return this.req(t+'?'+q,{method:'PATCH',body:b,prefer:'return=representation'})},
+ del(t,q){return this.req(t+'?'+q,{method:'DELETE',prefer:'return=minimal'})},
+ rpc(fn,a={}){return this.req('rpc/'+fn,{method:'POST',body:a})}
+};
+function banner(role){return `<div class="banner"><b>Test environment, not medical advice.</b> ${role} Do not enter real health information. Not a doctor, nothing for sale.</div>`}
+function line(vals,w=560,h=160,color='#3f7f72'){if(vals.length<2)return '<p class="muted">Not enough data yet.</p>';const p=28,mx=w-p-8,my=h-p-8;const pts=vals.map((v,i)=>[p+i*mx/(vals.length-1),8+my-(v/100)*my]);let g='';[0,50,100].forEach(t=>{const y=8+my-(t/100)*my;g+=`<line x1="${p}" x2="${w-8}" y1="${y}" y2="${y}" stroke="#e8e3de"/><text x="2" y="${y+4}">${t}</text>`});return `<svg viewBox="0 0 ${w} ${h}" width="100%" role="img" aria-label="trend chart">${g}<polyline fill="none" stroke="${color}" stroke-width="2.5" stroke-linejoin="round" points="${pts.map(p=>p.join(',')).join(' ')}"/><circle cx="${pts[pts.length-1][0]}" cy="${pts[pts.length-1][1]}" r="4" fill="${color}"/></svg>`}
+function spark(vals,w=90,h=26){if(vals.length<2)return '';const mn=Math.min(...vals),mxv=Math.max(...vals),r=(mxv-mn)||1;return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}"><polyline fill="none" stroke="#3f7f72" stroke-width="2" points="${vals.map((v,i)=>[i*w/(vals.length-1),h-2-((v-mn)/r)*(h-4)].join(',')).join(' ')}"/></svg>`}
+/* checkin value 1..5 -> 0..100 score */
+const score=v=>Math.round((v-1)/4*80+10);
+function byDim(rows){const o={};DIMS.forEach(d=>o[d]=[]);rows.forEach(r=>{if(o[r.dimension])o[r.dimension].push({t:new Date(r.created_at).getTime(),s:score(r.value)})});Object.values(o).forEach(a=>a.sort((x,y)=>x.t-y.t));return o}
+function dimStats(series){const DAY=864e5,now=Date.now();return DIMS.map(d=>{const a=series[d]||[];const first=a.slice(0,Math.max(1,Math.min(3,a.length))).map(x=>x.s);const recent=a.filter(x=>x.t>now-7*DAY).map(x=>x.s);const prev=a.filter(x=>x.t<=now-7*DAY&&x.t>now-14*DAY).map(x=>x.s);const b=avg(first),c=avg(recent.length?recent:a.slice(-3).map(x=>x.s));return {d,n:a.length,base:b,cur:c,delta:(b!=null&&c!=null)?c-b:null,wk:(avg(recent)!=null&&avg(prev)!=null)?avg(recent)-avg(prev):null,vals:a.map(x=>x.s)}})}
+/* claim checker */
+function checkClaims(t,rules){const h=[];(rules||[]).forEach(r=>{if(r.active===false)return;try{const m=new RegExp(r.pattern,'i').exec(t);if(m)h.push({match:m[0],why:r.reason})}catch(e){}});return h}
+/* safety classifier (rule-based) */
+function classify(t){const s=t.toLowerCase();
+if(/(chest pain|can't breathe|cannot breathe|overdose|unconscious|seizure|stroke)/.test(s))return'EMERGENCY';
+if(/(hurt myself|end my life|suicid|kill myself|don't want to live|no reason to live)/.test(s))return'POTENTIAL_CRISIS';
+if(/(side effect|reaction|rash|dizzy|vomit|allergic)/.test(s))return'ADVERSE_REACTION';
+if(/(how much|dose|dosage|mg\b)/.test(s)&&/(take|product|gumm|extract|oil|tea|capsule)/.test(s))return'PRODUCT_DOSAGE';
+if(/(medication|medicine|pill|tablet)/.test(s))return'MEDICATION_QUESTION';
+if(/(diagnos|do i have|disease|disorder|insomnia|depress|anxiety|condition)/.test(s))return'MEDICAL_QUESTION';
+return'NORMAL_WELLNESS'}
+const RESP={MEDICAL_QUESTION:'That sounds like something a qualified professional can assess. I cannot diagnose. I can help you note what you have reported and prepare questions for a clinician.',MEDICATION_QUESTION:'I cannot advise on starting, stopping or changing any medication. Please talk to your prescriber or pharmacist. I can help you write down questions for them.',PRODUCT_DOSAGE:'Dosage is for a clinician or the approved product label. I cannot set or suggest doses.',ADVERSE_REACTION:'If you feel unwell after taking anything, stop and contact your clinician or a doctor. If it is severe, get urgent care.',POTENTIAL_CRISIS:'I am glad you said something. You do not have to handle this alone. Please contact a trusted person or a crisis line now. In India you can call Tele-MANAS at 14416. I cannot assess or diagnose.',EMERGENCY:'This may be an emergency. Please call your local emergency number now (112 in India) or go to the nearest hospital.'};
+function download(name,obj){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(obj,null,2)],{type:'application/json'}));a.download=name;a.click()}
+function loginForm(title,sub,onsubmit,allowSignup){return `<div class="card" style="max-width:440px;margin:24px auto"><h2>${title}</h2><p class="muted">${sub}</p><form onsubmit="event.preventDefault();${onsubmit}"><p><input id="em" type="email" placeholder="Email" autocomplete="username" required></p><p><input id="pw" type="password" placeholder="Password" autocomplete="current-password" required minlength="8"></p><div id="err" class="note bad" style="display:none"></div><div class="row"><button class="btn" type="submit">Sign in</button>${allowSignup?'<button class="btn alt" type="button" onclick="showSignup()">Create account</button>':''}</div></form></div>`}
+let S={me:null,shares:[],sel:null,prof:null,checks:[],snaps:[],notes:[],msg:''};const app=$('#app');const B=()=>banner('Clinician portal (test accounts only). Patients and clinicians here are samples.');
+async function boot(){if(!SB.sess||!(await SB.token())){app.innerHTML=B()+'<div class="wrap">'+loginForm('Clinician sign in','Clinician accounts are created by Svara admin. You only see people who chose to share with you.','doLogin()',false)+'</div>';return}
+ try{const p=await SB.get('profiles','select=*&id=eq.'+SB.sess.uid);S.me=p[0];if(!S.me||S.me.role!=='clinician'){SB.logout();app.innerHTML=B()+'<div class="wrap"><div class="note bad">This login is not a clinician account.</div><button class="btn" onclick="boot()">Back</button></div>';return}
+ S.shares=(await SB.get('clinician_shares','select=*&active=eq.true&order=created_at.desc'));render()}catch(e){app.innerHTML=B()+`<div class="wrap"><div class="note bad">${esc(e.message)}</div></div>`}}
+async function doLogin(){try{await SB.login($('#em').value,$('#pw').value);boot()}catch(e){const x=$('#err');x.style.display='block';x.textContent=e.message}}
+function shell(i){return `${B()}<div class="wrap"><header class="top"><div class="logo">Svara <small>clinician</small></div><div class="row"><span class="muted">${esc(S.me.display_name)}</span><button class="btn alt" onclick="SB.logout();boot()">Sign out</button></div></header>${S.msg?`<div class="note">${esc(S.msg)}</div>`:''}${i}<footer>Svara reports are patient-reported wellness data. Not a diagnosis. Demo preview, not medical advice.</footer></div>`}
+function render(){app.innerHTML=shell(S.sel?report():list())}
+function list(){return `<div class="card"><h3>People sharing with you</h3>${S.shares.length?`<div class="tw"><table><tr><th>Person</th><th>Range</th><th>Shared on</th><th></th></tr>${S.shares.map(s=>`<tr><td>#${s.user_id.slice(0,6)}</td><td>${s.range_days} days</td><td>${new Date(s.created_at).toLocaleDateString()}</td><td><button class="btn" onclick="open_(${s.id})">Open report</button></td></tr>`).join('')}</table></div>`:'<p class="muted">Nobody has shared with you yet.</p>'}</div>`}
+async function open_(id){const s=S.shares.find(x=>x.id===id);S.sel=s;const since=new Date(Date.now()-s.range_days*864e5).toISOString();
+ const[p,c,sn,n]=await Promise.all([SB.get('profiles','select=*&id=eq.'+s.user_id),SB.get('checkins','select=*&user_id=eq.'+s.user_id+'&created_at=gte.'+since+'&order=created_at.asc'),SB.get('snapshots','select=*&user_id=eq.'+s.user_id+'&order=created_at.asc'),SB.get('clinician_notes','select=*&share_id=eq.'+id+'&order=created_at.desc')]);
+ S.prof=p[0];S.checks=c;S.snaps=sn;S.notes=n;try{await SB.ins('access_log',{user_id:s.user_id,actor:SB.sess.uid,action:'Clinician '+S.me.display_name+' opened your shared report'})}catch(e){}render()}
+function report(){const s=S.sel;const st=dimStats(byDim(S.checks)).filter(x=>x.n);const base=S.snaps[0];
+ return `<button class="btn alt" onclick="S.sel=null;render()">Back</button><div class="card"><h3>Patient-reported report: #${s.user_id.slice(0,6)} ${S.prof?'('+esc(S.prof.display_name||'')+')':''}</h3><p class="muted">Window: last ${s.range_days} days. Reported by the person, not measured. Not a diagnosis.</p><div class="tw"><table><tr><th>Area</th><th>Entries</th><th>Now</th><th>Change</th><th>Trend</th></tr>${st.map(x=>`<tr><td>${x.d}</td><td>${x.n}</td><td>${x.cur}</td><td>${x.delta==null?'':sgn(x.delta)} <span class="pill">${word(x.delta||0)}</span></td><td>${spark(x.vals)}</td></tr>`).join('')||'<tr><td>No entries in this window.</td></tr>'}</table></div></div>
+<div class="grid"><div class="card"><h3>Their goals</h3><p>${esc(s.goals_note||'None given')}</p></div><div class="card"><h3>Their questions</h3><p>${esc(s.questions_note||'None given')}</p></div></div>
+<div class="card"><h3>Your note and decision</h3><p><textarea id="nt" placeholder="Clinical note (visible only to you and Svara admins on request)"></textarea></p><p><select id="ns"><option>Awaiting review</option><option>Reviewed, no action</option><option>Follow up with person</option><option>Suggest in-person visit</option></select></p><button class="btn" onclick="saveNote()">Save note</button><h3 style="margin-top:18px">Previous notes</h3>${S.notes.map(n=>`<p><b>${new Date(n.created_at).toLocaleString()}</b> <span class="pill">${esc(n.status)}</span><br>${esc(n.note)}</p>`).join('')||'<p class="muted">None yet.</p>'}</div>`}
+async function saveNote(){await SB.ins('clinician_notes',{share_id:S.sel.id,clinician_id:SB.sess.uid,note:$('#nt').value,status:$('#ns').value});S.msg='Note saved.';await open_(S.sel.id)}
+boot();
+</script></body></html>
